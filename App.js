@@ -9,16 +9,14 @@ const App = () => {
 
   function textRecognized(obj) {
     const data = obj
-    setTextBlock(data)
+    setTextBlock(data.textBlocks)
     console.log(data)
   }
 
   function renderTextBlocks() {
     return (
       <View style={styles.facesContainer} pointerEvents="none">
-        {
-          <Text>Test</Text>
-        }
+        <Text>{JSON.stringify(textBlock)}</Text>
       </View>
     )
   }
@@ -35,7 +33,7 @@ const App = () => {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
         }}
-        onTextRecognized={(res) => canDetectText ? textRecognized(res) : null}
+        onTextRecognized={canDetectText ? textRecognized : null}
       >
         {!!canDetectText && renderTextBlocks()}
       </RNCamera>
@@ -52,6 +50,10 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  facesContainer: {
+    position: 'absolute',
   }
 });
 
